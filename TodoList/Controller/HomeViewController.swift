@@ -2,16 +2,22 @@
 //  ViewController.swift
 //  Todo List
 //
-//  Created by liem on 11/1/23.
+//  Created by liem on 11/1/23. 
 //
 
 import UIKit
 
 class HomeViewController: UIViewController {
 
+    let service = MovieLibraryDataService()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .blue
+        
+        tableView.dataSource = service
+        tableView.delegate = service
+        tableView.register(MovieTableCell.self, forCellReuseIdentifier: MovieTableCell.identifier)
         
         view.addSubview(tableView)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -23,7 +29,7 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    private let tableView: UITableView = {
+    let tableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.backgroundColor = .white
